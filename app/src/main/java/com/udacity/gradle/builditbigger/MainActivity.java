@@ -47,17 +47,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        //Step 1
-        jokesTeller = new myJokesClass();
-        String joke =jokesTeller.getRandomJoke();
-        Toast.makeText(this, joke, Toast.LENGTH_SHORT).show();
-        //Step 2
-        this.mContext = getApplicationContext();
-        Intent intent = new Intent(mContext, JokeMessage.class);
-        intent.putExtra(JokeMessage.JOKE_INTENT, joke);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        new EndPointAsyncTask(this).execute();
     }
-
-
 }

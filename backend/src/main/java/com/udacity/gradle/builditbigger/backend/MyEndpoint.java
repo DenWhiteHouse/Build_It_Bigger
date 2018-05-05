@@ -8,7 +8,7 @@ import javax.inject.Named;
 
 /** An endpoint class we are exposing */
 @Api(
-        name = "myApi",
+        name = "myJokeApi",
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.builditbigger.gradle.udacity.com",
@@ -18,13 +18,9 @@ import javax.inject.Named;
 )
 public class MyEndpoint {
 
-    /** A simple endpoint method that takes a name and says Hi back */
-    @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
-        MyBean response = new MyBean();
-        response.setData("Hi, " + name);
-
-        return response;
-    }
-
+    /** A simple endpoint that returns a joke*/
+    @ApiMethod(name = "insertJoke")
+        public MyBean insertJoke(MyBean joke){
+            return joke;
+        }
 }
