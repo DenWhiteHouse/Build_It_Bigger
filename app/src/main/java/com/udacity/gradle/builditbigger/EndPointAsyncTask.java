@@ -29,11 +29,17 @@ public class EndPointAsyncTask extends AsyncTask<Pair<Context, String>, Void, St
         if (myApiService == null) {
             MyJokeApi.Builder builder = new MyJokeApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
-                    .setRootUrl("http://192.168.1.7:8080/_ah/api/");
+                    .setRootUrl("http://10.0.2.2:8080/_ah/api/")
+                    .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+                        @Override
+                        public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+                            abstractGoogleClientRequest.setDisableGZipContent(true);
+                        }
+                    });
             myApiService = builder.build();
         }
         try {
-            return myApiService.insertJoke (new MyBean()).execute().getJoke();
+            return myApiService.insertJoke(new MyBean()).execute().getJoke();
         } catch (IOException e) {
             return e.getMessage();
         }
